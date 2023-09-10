@@ -1,13 +1,17 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Ad
+from django.views import generic
 
 
-def index(request):
-    latest_ads_list = Ad.objects.order_by("-date_posted")[:10]
-    context = {"latest_ads_list": latest_ads_list}
-    return render(request, "classified_ads/index.html", context)
+class IndexView(generic.ListView):
+    template_name = 'classified_ads/index.html'
+    context_object_name = 'latest_ads_list'
+
+    def get_queryset(self):
+        """Return the last 10 published questions."""
+        return Ad.objects.order_by("-date_posted")[:10]
 
 
-def detail(request, ad_id):
-    context = {"parent_ad": get_object_or_404(Ad, pk=ad_id)}
-    return render(request, 'classified_ads/detail.html', context)
+class DetailView(generic.DetailView):
+    model = Ad
+    template_name = 'classified_ads/detail.html'
