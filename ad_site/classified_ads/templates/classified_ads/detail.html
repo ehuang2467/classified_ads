@@ -1,0 +1,6 @@
+<h1>{{ parent_ad.ad_text }}</h1>
+<ul>
+  {% for comment in parent_ad.comment_set.all %}
+  <li>{{ comment.comment_text }}</li>
+  {% endfor %}
+</ul>
