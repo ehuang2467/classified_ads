@@ -1,3 +1,6 @@
+<form action="{% url 'classified_ads:index'%}">
+  <input type="submit" value="Back to home">
+</form>
 <h1>{{ ad.ad_text }}</h1>
 <ul>
   {% for comment in ad.comment_set.all %}
@@ -13,5 +16,5 @@
   <label for="user">User:</label><br>
   <input type="text" id="user" name="user">
   <br>
-  <input type="submit" value="comment">
+  <input type="submit" value="Post comment">
 </form>

@@ -8,3 +8,13 @@
 {% else %}
 <p>No ads have been posted.</p>
 {% endif %}
+
+<form action="{% url 'classified_ads:comment' ad.id %}" method="post">
+  {% csrf_token %}
+  <label for="comment">Comment:</label><br>
+  <input type="text" id="comment" name="comment"><br>
+  <label for="user">User:</label><br>
+  <input type="text" id="user" name="user">
+  <br>
+  <input type="submit" value="Post comment">
+</form>
