@@ -12,6 +12,7 @@ class Ad(models.Model):
     date_posted = models.DateTimeField('date posted')
     ad_type = models.CharField(
         max_length=4, choices=ad_type_choices)
+    user = models.CharField(max_length=200)
 
     def __str__(self) -> str:
         return self.ad_text
