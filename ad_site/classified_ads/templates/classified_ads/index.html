@@ -9,12 +9,17 @@
 <p>No ads have been posted.</p>
 {% endif %}
 
-<form action="{% url 'classified_ads:comment' ad.id %}" method="post">
+<form action="{% url 'classified_ads:post'%}" method="post">
   {% csrf_token %}
-  <label for="comment">Comment:</label><br>
-  <input type="text" id="comment" name="comment"><br>
+  <select name="ad_type" id="ad_type">
+    <option value="Buy">Buy</option>
+    <option value="Sell">Sell</option>
+  </select>
+  <br>
+  <label for="post">Post:</label><br>
+  <input type="text" id="post" name="post"><br>
   <label for="user">User:</label><br>
   <input type="text" id="user" name="user">
   <br>
-  <input type="submit" value="Post comment">
+  <input type="submit" value="Post ad">
 </form>

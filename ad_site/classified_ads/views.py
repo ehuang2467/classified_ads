@@ -29,3 +29,12 @@ def comment(request, pk):
     new_comment.save()
     ad.comment_set.add(new_comment)
     return HttpResponseRedirect(reverse('classified_ads:detail', args=(ad.id,)))
+
+
+def post(request):
+    new_ad = Ad(ad_text=request.POST["post"],
+                ad_type=request.POST["ad_type"],
+                date_posted=timezone.now(),
+                user=request.POST["user"])
+    new_ad.save()
+    return HttpResponseRedirect(reverse('classified_ads:index'))
