@@ -1,13 +1,13 @@
 Register
-<form action="{% url 'classified_ads:post'%}" method="post">
+<form action="{% url 'classified_ads:register'%}" method="post">
   {% csrf_token %}
 
-  <label for="Username">Username:</label><br>
-  <input type="text" id="Username" name="Username"><br>
-  <label for="Password">Password:</label><br>
-  <input type="text" id="Password" name="Password">
+  <label for="username">Username:</label><br>
+  <input type="text" id="username" name="username"><br>
+  <label for="password">Password:</label><br>
+  <input type="text" id="password" name="password">
   <br>
-  <input type="submit" value="Login">
+  <input type="submit" value="Register">
 </form>
 
 <br>
