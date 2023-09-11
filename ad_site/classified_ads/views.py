@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 class IndexView(generic.ListView):
@@ -48,11 +49,24 @@ def post(request):
     return HttpResponseRedirect(reverse('classified_ads:index'))
 
 
-def login(request):
+def login_register(request):
     return render(request, "classified_ads/login_register.html", {})
 
 
 def register(request):
+
     User.objects.create_user(username=request.POST["username"],
                              password=request.POST["password"])
     return HttpResponseRedirect(reverse('classified_ads:index'))
+
+
+def login_view(request):
+    attempted_user = authenticate(username=request.POST["username"],
+                                  password=request.POST["password"])
+    login_is_successful = attempted_user is not None
+    if login_is_successful:
+        login(request, attempted_user)
+        return HttpResponseRedirect(reverse('classified_ads:index'))
+    else:
+        print("login failed")
+        return HttpResponse("Login failed")
