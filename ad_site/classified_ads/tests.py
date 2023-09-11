@@ -45,22 +45,25 @@ class AdDetailViewTests(TestCase):
         """
         If no comments exist, no comments are displayed.
         """
-        response = self.client.get(reverse('classified_ads:index'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No ads have been posted.")
-        self.assertQuerysetEqual(response.context['latest_ads_list'], [])
+        ad = create_ad(ad_text="now_ad", days=0)
+        print(f"now_ad.pk is {ad.pk}")
+        response = self.client.get(
+            reverse('classified_ads:detail', kwargs={"pk": ad.pk}))
 
-    def test_ads(self):
-        """
-        If 2 ads exist, they are displayed and 
-        in order of newest post to oldest post.
-        """
-        now_ad = create_ad(ad_text="now_ad", days=0)
-        yesterday_ad = create_ad(ad_text="yesterday ad", days=-1)
-        response = self.client.get(reverse('classified_ads:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['latest_ads_list'],
-                                 [now_ad, yesterday_ad])
+        self.assertQuerysetEqual(response.context['ad'].comment_set.all(), [])
+
+    # def test_ads(self):
+    #     """
+    #     If 2 ads exist, they are displayed and
+    #     in order of newest post to oldest post.
+    #     """
+    #     now_ad = create_ad(ad_text="now_ad", days=0)
+    #     yesterday_ad = create_ad(ad_text="yesterday ad", days=-1)
+    #     response = self.client.get(reverse('classified_ads:index'))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertQuerysetEqual(response.context['latest_ads_list'],
+    #                              [now_ad, yesterday_ad])
 
 
 # Create your tests here.
