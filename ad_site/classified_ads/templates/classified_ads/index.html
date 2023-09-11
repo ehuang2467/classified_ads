@@ -9,6 +9,8 @@
 <p>No ads have been posted.</p>
 {% endif %}
 
+{% if user.is_authenticated %}
+
 <form action="{% url 'classified_ads:post'%}" method="post">
   {% csrf_token %}
   <select name="ad_type" id="ad_type">
@@ -25,6 +27,16 @@
   <br>
   <input type="submit" value="Post ad">
 </form>
+
+{% else %}
+You cannot post ads without logging in.
+{% endif %}
+
+{% if user.is_authenticated %}
+<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+{% else %}
+<p>Welcome, new user. Please log in.</p>
+{% endif %}
 
 <form action="{% url 'classified_ads:login_register'%}">
   <input type="submit" value="Login/Register">

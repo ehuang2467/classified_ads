@@ -23,3 +23,9 @@ Login
   <br>
   <input type="submit" value="Login">
 </form>
+
+<br>
+<form action="{% url 'classified_ads:logout'%}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>

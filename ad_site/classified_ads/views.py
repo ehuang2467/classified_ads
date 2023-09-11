@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 class IndexView(generic.ListView):
@@ -68,5 +68,9 @@ def login_view(request):
         login(request, attempted_user)
         return HttpResponseRedirect(reverse('classified_ads:index'))
     else:
-        print("login failed")
         return HttpResponse("Login failed")
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('classified_ads:index'))

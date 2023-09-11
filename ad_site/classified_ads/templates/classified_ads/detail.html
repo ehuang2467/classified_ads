@@ -10,6 +10,14 @@
   {% endfor %}
 </ul>
 
+{% if user.is_authenticated %}
+<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+{% else %}
+<p>Welcome, new user. Please log in.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+
 <form action="{% url 'classified_ads:comment' ad.id %}" method="post">
   {% csrf_token %}
   <label for="comment">Comment:</label><br>
@@ -19,3 +27,6 @@
   <br>
   <input type="submit" value="Post comment">
 </form>
+{% else %}
+You cannot post comments without logging in.
+{% endif %}
