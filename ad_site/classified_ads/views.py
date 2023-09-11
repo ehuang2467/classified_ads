@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Ad, Comment
 from django.views import generic
 from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
 
@@ -45,3 +45,7 @@ def post(request):
                 user=request.POST["user"])
     new_ad.save()
     return HttpResponseRedirect(reverse('classified_ads:index'))
+
+
+def login(request):
+    return render(request, "classified_ads/login_register.html", {})
