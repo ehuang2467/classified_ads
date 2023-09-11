@@ -19,6 +19,8 @@ class Ad(models.Model):
 
 
 class Comment(models.Model):
+    class Meta:
+        ordering = ['date_posted']
     parent_ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
     comment_text = models.CharField(max_length=1000)
     date_posted = models.DateTimeField('date posted')
