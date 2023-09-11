@@ -1,4 +1,2 @@
 implement:
-logout
-permissions to post ad and comment
 DRY principle for displaying user logged in, etc
