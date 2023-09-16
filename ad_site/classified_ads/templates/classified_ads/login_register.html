@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
+
 Register
 <form action="{% url 'classified_ads:register'%}" method="post">
   {% csrf_token %}
