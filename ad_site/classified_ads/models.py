@@ -21,7 +21,7 @@ class Ad(models.Model):
         (SELL, "Sell")
     ]
     ad_text = models.CharField(max_length=1000)
-    date_posted = models.DateTimeField('date posted')
+    date_posted = models.DateTimeField()
     ad_type = models.CharField(
         max_length=4, choices=ad_type_choices)
     user = models.CharField(max_length=30)
@@ -35,7 +35,7 @@ class Comment(models.Model):
         ordering = ['date_posted']
     parent_ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
     comment_text = models.CharField(max_length=1000)
-    date_posted = models.DateTimeField('date posted')
+    date_posted = models.DateTimeField()
     user = models.CharField(max_length=30)
 
     def __str__(self) -> str:
