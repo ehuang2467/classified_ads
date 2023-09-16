@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout, get_user
+from django.contrib import auth  # authenticate, login, logout, get_user
 
 
 class IndexView(generic.ListView):
@@ -34,7 +34,7 @@ def comment(request, pk):
     new_comment = Comment(parent_ad=ad,
                           text=request.POST["comment"],
                           date_posted=timezone.now(),
-                          user=get_user(request))
+                          user=auth.get_user(request))
     new_comment.save()
     ad.comment_set.add(new_comment)
     return HttpResponseRedirect(reverse('classified_ads:detail', args=(ad.id,)))
@@ -44,7 +44,7 @@ def post(request):
     new_ad = Ad(text=request.POST["post"],
                 ad_type=request.POST["ad_type"],
                 date_posted=timezone.now(),
-                user=get_user(request))
+                user=auth.get_user(request))
     new_ad.save()
     return HttpResponseRedirect(reverse('classified_ads:index'))
 
@@ -61,16 +61,16 @@ def register(request):
 
 
 def login_view(request):
-    attempted_user = authenticate(username=request.POST["username"],
-                                  password=request.POST["password"])
+    attempted_user = auth.authenticate(username=request.POST["username"],
+                                       password=request.POST["password"])
     login_is_successful = attempted_user is not None
     if login_is_successful:
-        login(request, attempted_user)
+        auth.login(request, attempted_user)
         return HttpResponseRedirect(reverse('classified_ads:index'))
     else:
         return HttpResponse("Login failed")
 
 
 def logout_view(request):
-    logout(request)
+    auth.logout(request)
     return HttpResponseRedirect(reverse('classified_ads:index'))
