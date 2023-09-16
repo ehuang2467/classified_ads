@@ -81,3 +81,14 @@ class AdDetailViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(list(response.context['ad'].comment_set.all()),
                                  [yesterday_comment, now_comment])
+
+
+class AuthTests(TestCase):
+    def test_register_and_login(self):
+        register_context = {"username": "fake_username",
+                            "password": "fake_password"}
+        self.client.post(
+            reverse('classified_ads:register'), register_context
+        )
+        self.assertTrue(self.client.login(username=register_context["username"],
+                                          password=register_context["password"]))
