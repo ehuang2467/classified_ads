@@ -34,6 +34,12 @@
   <input type="submit" value="Post ad">
 </form>
 
+<form action="{% url 'classified_ads:index'%}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ ad_form }}
+  <input type="submit" value="Submit">
+</form>
+
 {% else %}
 You cannot post ads without logging in.
 {% endif %}
@@ -41,12 +47,15 @@ You cannot post ads without logging in.
 {% if user.is_authenticated %}
 <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
 <br>
-<form action="{% url 'classified_ads:logout'%}">
+<form action="{% url 'classified_ads:logout'%}" method="post">
+  {% csrf_token %}
   <input type="submit" value="Logout">
 </form>
+
 {% else %}
 <p>Welcome, new user. Please log in or register.</p>
-<form action="{% url 'classified_ads:login_register'%}">
+<form action="{% url 'classified_ads:login_register'%}" method="post">
+  {% csrf_token %}
   <input type="submit" value="Login/Register">
 </form>
 {% endif %}

@@ -1,3 +1,4 @@
+import django.forms.fields as dff
 from django.shortcuts import render, get_object_or_404
 from .models import Ad, Comment
 from django.views import generic
@@ -8,13 +9,48 @@ from django.contrib.auth.models import User
 from django.contrib import auth  # authenticate, login, logout, get_user
 
 
-class IndexView(generic.ListView):
-    template_name = 'classified_ads/index.html'
-    context_object_name = 'latest_ads_list'
+# class IndexView(generic.ListView):
+#     template_name = 'classified_ads/index.html'
+#     context_object_name = 'latest_ads_list'
 
-    def get_queryset(self):
-        """Return the last 10 published ads."""
-        return Ad.objects.order_by("-date_posted")[:10]
+#     def get_queryset(self):
+#         """Return the last 10 published ads."""
+#         return Ad.objects.order_by("-date_posted")[:10]
+
+def post(request, ad_form):
+    try:
+        image = ad_form.cleaned_data["image"]
+    except:
+        image = None
+    new_ad = Ad(text=ad_form.cleaned_data["text"],
+                ad_type=request.POST["ad_type"],
+                date_posted=timezone.now(),
+                user=auth.get_user(request),
+                image=image)
+    # image = request.FILES["image"]
+    # new_ad = Ad(text=request.POST["post"],
+    #             ad_type=request.POST["ad_type"],
+    #             date_posted=timezone.now(),
+    #             user=auth.get_user(request),
+    #             image=image)
+    new_ad.save()
+
+
+def index(request):
+    from .forms import AdForm
+    if request.method == 'POST':
+        ad_form = AdForm(request.POST, request.FILES)
+        print("BEFORE IS VALID")
+        if ad_form.is_valid():
+            print("AFTER IS VALID")
+            post(request, ad_form)
+            return HttpResponseRedirect(reverse('classified_ads:index'))
+    else:
+        ad_form = AdForm()
+    latest_ads_list = Ad.objects.order_by("-date_posted")[:10]
+    context_dict = {"latest_ads_list": latest_ads_list,
+                    "ad_form": ad_form}
+    return render(request, "classified_ads/index.html", context_dict)
 
 
 class DetailView(generic.DetailView):
@@ -38,17 +74,6 @@ def comment(request, pk):
     new_comment.save()
     ad.comment_set.add(new_comment)
     return HttpResponseRedirect(reverse('classified_ads:detail', args=(ad.id,)))
-
-
-def post(request):
-    image = request.FILES["image"]
-    new_ad = Ad(text=request.POST["post"],
-                ad_type=request.POST["ad_type"],
-                date_posted=timezone.now(),
-                user=auth.get_user(request),
-                image=image)
-    new_ad.save()
-    return HttpResponseRedirect(reverse('classified_ads:index'))
 
 
 def login_register(request):
@@ -76,3 +101,24 @@ def login_view(request):
 def logout_view(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('classified_ads:index'))
+
+
+def form_testing(request):
+    from .forms import NameForm
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        name_form = NameForm(request.POST)
+        # check whether it's valid:
+        if name_form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            name = name_form.cleaned_data["your_name"]
+            return HttpResponse(f"Form success! Your name is {name}")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        name_form = NameForm()
+
+    return render(request, 'classified_ads/form_testing.html',
+                  {'name_form': name_form})
