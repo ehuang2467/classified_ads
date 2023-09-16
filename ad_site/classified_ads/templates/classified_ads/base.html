@@ -15,29 +15,24 @@
 
   </ul>
 
+  {% block login_status %}
+  <div class="login-status">
+    {% if user.is_authenticated %}
+
+    Welcome, {{ user.username }}. Thanks for logging in.
+    <a href="{% url 'classified_ads:logout'%}">Logout</a>
+
+    {% else %}
+
+    Welcome, new user. Please log in or register.
+    <a href="{% url 'classified_ads:login_register'%}">Login/Register</a>
+    {% endif %}
+  </div>
+  {% endblock login_status %}
+
 </nav>
 {% endblock header %}
 
 {% block content %}
 Your content here!!!
 {% endblock content %}
-
-{% block login_status %}
-<br>
-{% if user.is_authenticated %}
-<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-
-<form action="{% url 'classified_ads:logout'%}" method="post">
-  {% csrf_token %}
-  <input type="submit" value="Logout">
-</form>
-
-{% else %}
-<p>Welcome, new user. Please log in or register.</p>
-<form action="{% url 'classified_ads:login_register'%}" method="post">
-  {% csrf_token %}
-  <input type="submit" value="Login/Register">
-</form>
-{% endif %}
-
-{% endblock login_status %}
