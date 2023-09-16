@@ -29,9 +29,6 @@ class Ad(Postable):
     image = models.ImageField(
         null=True, default=None)
 
-    def has_image(self):
-        return not self.image
-
 
 class Comment(Postable):
     parent_ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
