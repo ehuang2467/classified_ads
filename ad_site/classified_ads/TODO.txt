@@ -1,2 +1,5 @@
 implement:
 DRY principle for displaying user logged in, etc
+how to make the user field in ad and comment by actual registered users?
+can make an abstract model called postable that has fields 
+  "date_posted", "user", etc and ad and comment are subclasses of postable
