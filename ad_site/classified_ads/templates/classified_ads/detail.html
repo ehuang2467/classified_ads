@@ -5,7 +5,7 @@
 <h1>{{ ad.ad_text }}</h1>
 <ul>
   {% for comment in ad.comment_set.all %}
-  <li>{{ comment.comment_text }}
+  <li>{{ comment.text }}
     Posted on: {{ comment.date_posted }} by {{ comment.user }}</li>
   {% endfor %}
 </ul>
