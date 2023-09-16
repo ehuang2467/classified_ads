@@ -34,7 +34,7 @@ def comment(request, pk):
     new_comment = Comment(parent_ad=ad,
                           text=request.POST["comment"],
                           date_posted=timezone.now(),
-                          user=request.POST["user"])
+                          user=get_user(request))
     new_comment.save()
     ad.comment_set.add(new_comment)
     return HttpResponseRedirect(reverse('classified_ads:detail', args=(ad.id,)))
