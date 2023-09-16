@@ -1,15 +1,14 @@
-{% load static %}
+{% extends "classified_ads/base.html" %}
 
-<link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
+{% block content %}
 
-<form action="{% url 'classified_ads:index'%}">
-  <input type="submit" value="Back to home">
-</form>
+
 
 <h1>{{ ad.text }}</h1> - Posted by {{ad.user.username}} on {{ad.date_posted}}
 <br>
 
 {% if ad.image %}
+{% load static %}
 <img src="{% static 'classified_ads'%}{{ad.image.url}}">
 {% endif %}
 
@@ -35,10 +34,4 @@
 You cannot post comments without logging in.
 {% endif %}
 
-<br>
-
-{% if user.is_authenticated %}
-<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-{% else %}
-<p>Welcome, new user. Please log in.</p>
-{% endif %}
+{% endblock content %}

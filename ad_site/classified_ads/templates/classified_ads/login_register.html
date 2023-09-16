@@ -1,6 +1,6 @@
-{% load static %}
+{% extends "classified_ads/base.html" %}
 
-<link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
+{% block content %}
 
 Register
 
@@ -19,3 +19,5 @@ Login
   {{user_form.as_div}}
   <input type="submit" value="Login">
 </form>
+
+{% endblock content %}

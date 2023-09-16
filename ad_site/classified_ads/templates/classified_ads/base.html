@@ -1,0 +1,43 @@
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
+{% endblock css %}
+
+{% block header %}
+<nav>
+  <div class="heading">
+    <h1>Eric's Classified Ad Site</h1>
+  </div>
+
+  <ul class="nav-links">
+
+    <li><a href="{% url 'classified_ads:index'%}">Home</a></li>
+
+  </ul>
+
+</nav>
+{% endblock header %}
+
+{% block content %}
+Your content here!!!
+{% endblock content %}
+
+{% block login_status %}
+<br>
+{% if user.is_authenticated %}
+<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+
+<form action="{% url 'classified_ads:logout'%}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
+
+{% else %}
+<p>Welcome, new user. Please log in or register.</p>
+<form action="{% url 'classified_ads:login_register'%}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Login/Register">
+</form>
+{% endif %}
+
+{% endblock login_status %}
