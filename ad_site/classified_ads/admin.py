@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Ad, Comment
 
+admin.site.site_header = "Eric's Admin Page"
+
 
 class CommentInline(admin.TabularInline):
     model = Comment
