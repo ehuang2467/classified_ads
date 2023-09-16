@@ -3,27 +3,19 @@
 <link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
 
 Register
+
 <form action="{% url 'classified_ads:register'%}" method="post">
   {% csrf_token %}
-
-  <label for="username">Username:</label><br>
-  <input type="text" id="username" name="username"><br>
-  <label for="password">Password:</label><br>
-  <input type="text" id="password" name="password">
-  <br>
+  {{user_form.as_div}}
   <input type="submit" value="Register">
 </form>
 
 <br>
 
 Login
+
 <form action="{% url 'classified_ads:login'%}" method="post">
   {% csrf_token %}
-
-  <label for="username">Username:</label><br>
-  <input type="text" id="username" name="username"><br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password">
-  <br>
+  {{user_form.as_div}}
   <input type="submit" value="Login">
 </form>

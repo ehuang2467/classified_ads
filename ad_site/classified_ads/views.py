@@ -1,13 +1,11 @@
-import django.forms.fields as dff
 from django.shortcuts import render, get_object_or_404
 from .models import Ad, Comment
-from django.views import generic
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib import auth  # authenticate, login, logout, get_user
-from .forms import AdForm, CommentForm
+from django.contrib import auth
+from .forms import AdForm, CommentForm, UserForm
 
 
 # class IndexView(generic.ListView):
@@ -82,7 +80,9 @@ def detail(request, pk):
 
 
 def login_register(request):
-    return render(request, "classified_ads/login_register.html", {})
+    user_form = UserForm()
+    context_dict = {"user_form": user_form}
+    return render(request, "classified_ads/login_register.html", context_dict)
 
 
 def register(request):
