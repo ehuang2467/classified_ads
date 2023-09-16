@@ -6,7 +6,14 @@ from .models import Ad
 class AdForm(ModelForm):
     class Meta:
         model = Ad
-        exclude = ["date_posted", "user",]
+        fields = ["ad_type", "text",  "image"]
+        labels = {
+            "text": "Ad Description",
+            "image": "Image (optional)",
+        }
+        # help_texts = {
+        #     "image": "optional"
+        # }
 
 
 class NameForm(forms.Form):
