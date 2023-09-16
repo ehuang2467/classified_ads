@@ -41,10 +41,9 @@ def comment(request, pk):
 
 
 def post(request):
-    new_ad = Ad(ad_text=request.POST["post"],
+    new_ad = Ad(text=request.POST["post"],
                 ad_type=request.POST["ad_type"],
-                date_posted=timezone.now(),
-                user=request.POST["user"])
+                date_posted=timezone.now())
     new_ad.save()
     return HttpResponseRedirect(reverse('classified_ads:index'))
 

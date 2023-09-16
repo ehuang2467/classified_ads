@@ -1,3 +1,2 @@
 implement:
 DRY principle for displaying user logged in, etc
-how to make the user field in ad and comment by actual registered users?
