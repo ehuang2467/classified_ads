@@ -7,7 +7,7 @@ class Postable(models.Model):
     date_posted = models.DateTimeField()
     # user = models.CharField(max_length=30)
     user = models.ForeignKey(
-        auth_models.User, on_delete=models.SET_NULL, null=True, default=None)
+        auth_models.User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         abstract = True

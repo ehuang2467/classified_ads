@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 
 
 class IndexView(generic.ListView):
@@ -32,7 +32,7 @@ class DetailView(generic.DetailView):
 def comment(request, pk):
     ad = get_object_or_404(Ad, pk=pk)
     new_comment = Comment(parent_ad=ad,
-                          comment_text=request.POST["comment"],
+                          text=request.POST["comment"],
                           date_posted=timezone.now(),
                           user=request.POST["user"])
     new_comment.save()
@@ -43,7 +43,8 @@ def comment(request, pk):
 def post(request):
     new_ad = Ad(text=request.POST["post"],
                 ad_type=request.POST["ad_type"],
-                date_posted=timezone.now())
+                date_posted=timezone.now(),
+                user=get_user(request))
     new_ad.save()
     return HttpResponseRedirect(reverse('classified_ads:index'))
 
