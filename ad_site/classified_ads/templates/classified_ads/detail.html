@@ -1,8 +1,9 @@
 <form action="{% url 'classified_ads:index'%}">
   <input type="submit" value="Back to home">
 </form>
-
+{% load static %}
 <h1>{{ ad.ad_text }}</h1>
+<img src="{% static 'classified_ads'%}{{ad.image.url}}">
 <ul>
   {% for comment in ad.comment_set.all %}
   <li>{{ comment.text }}
@@ -18,7 +19,7 @@
 
 {% if user.is_authenticated %}
 
-<form action="{% url 'classified_ads:comment' ad.id %}" method="post">
+<form action=" {% url 'classified_ads:comment' ad.id %}" method="post">
   {% csrf_token %}
   <label for="comment">Comment:</label><br>
   <input type="text" id="comment" name="comment"><br>

@@ -45,7 +45,8 @@ def post(request):
     new_ad = Ad(text=request.POST["post"],
                 ad_type=request.POST["ad_type"],
                 date_posted=timezone.now(),
-                user=auth.get_user(request))
+                user=auth.get_user(request),
+                image=image)
     new_ad.save()
     return HttpResponseRedirect(reverse('classified_ads:index'))
 

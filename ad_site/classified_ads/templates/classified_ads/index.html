@@ -15,7 +15,7 @@
 
 {% if user.is_authenticated %}
 
-<form action="{% url 'classified_ads:post'%}" method="post">
+<form action="{% url 'classified_ads:post'%}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <select name="ad_type" id="ad_type">
 
