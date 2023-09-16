@@ -6,7 +6,7 @@
 <ul>
   {% for comment in ad.comment_set.all %}
   <li>{{ comment.text }}
-    Posted on: {{ comment.date_posted }} by {{ comment.user }}</li>
+    Posted on: {{ comment.date_posted }} by {{ comment.user.username }}</li>
   {% endfor %}
 </ul>
 
@@ -22,8 +22,6 @@
   {% csrf_token %}
   <label for="comment">Comment:</label><br>
   <input type="text" id="comment" name="comment"><br>
-  <label for="user">User:</label><br>
-  <input type="text" id="user" name="user">
   <br>
   <input type="submit" value="Post comment">
 </form>

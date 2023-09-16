@@ -2,7 +2,7 @@
 <ul>
   {% for ad in latest_ads_list %}
   <li><a href="{% url 'classified_ads:detail' ad.id %}">{{ ad.text }}</a>
-    Posted on: {{ ad.date_posted }} by {{ ad.user }}</li>
+    Posted on: {{ ad.date_posted }} by {{ ad.user.username }}</li>
   {% endfor %}
 </ul>
 {% else %}
@@ -22,8 +22,6 @@
   <br>
   <label for="post">Post:</label><br>
   <input type="text" id="post" name="post"><br>
-  <label for="user">User:</label><br>
-  <input type="text" id="user" name="user">
   <br>
   <input type="submit" value="Post ad">
 </form>
