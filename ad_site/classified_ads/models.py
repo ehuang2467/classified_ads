@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.core.files.storage import FileSystemStorage
 
 
 class Postable(models.Model):
@@ -26,7 +27,6 @@ class Ad(Postable):
     ad_type = models.CharField(
         max_length=4, choices=ad_type_choices)
     image = models.ImageField(
-        upload_to="classified_ads/static/classified_images",
         null=True, default=None)
 
 
