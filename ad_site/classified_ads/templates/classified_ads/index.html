@@ -38,10 +38,13 @@ You cannot post ads without logging in.
 
 {% if user.is_authenticated %}
 <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+<br>
+<form action="{% url 'classified_ads:logout'%}">
+  <input type="submit" value="Logout">
+</form>
 {% else %}
-<p>Welcome, new user. Please log in.</p>
-{% endif %}
-
+<p>Welcome, new user. Please log in or register.</p>
 <form action="{% url 'classified_ads:login_register'%}">
   <input type="submit" value="Login/Register">
 </form>
+{% endif %}
