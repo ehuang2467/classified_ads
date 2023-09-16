@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
+
 {% if latest_ads_list %}
 <ul>
   {% for ad in latest_ads_list %}
