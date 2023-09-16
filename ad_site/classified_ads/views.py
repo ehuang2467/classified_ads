@@ -17,7 +17,7 @@ from django.contrib import auth  # authenticate, login, logout, get_user
 #         """Return the last 10 published ads."""
 #         return Ad.objects.order_by("-date_posted")[:10]
 
-def post(request, ad_form):
+def post_ad(request, ad_form):
     try:
         image = ad_form.cleaned_data["image"]
     except:
@@ -27,12 +27,6 @@ def post(request, ad_form):
                 date_posted=timezone.now(),
                 user=auth.get_user(request),
                 image=image)
-    # image = request.FILES["image"]
-    # new_ad = Ad(text=request.POST["post"],
-    #             ad_type=request.POST["ad_type"],
-    #             date_posted=timezone.now(),
-    #             user=auth.get_user(request),
-    #             image=image)
     new_ad.save()
 
 
@@ -40,10 +34,8 @@ def index(request):
     from .forms import AdForm
     if request.method == 'POST':
         ad_form = AdForm(request.POST, request.FILES)
-        print("BEFORE IS VALID")
         if ad_form.is_valid():
-            print("AFTER IS VALID")
-            post(request, ad_form)
+            post_ad(request, ad_form)
             return HttpResponseRedirect(reverse('classified_ads:index'))
     else:
         ad_form = AdForm()
