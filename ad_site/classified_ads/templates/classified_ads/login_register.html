@@ -2,7 +2,7 @@
 
 {% block content %}
 
-Register
+<h3> Register </h3>
 
 <form action="{% url 'classified_ads:register'%}" method="post">
   {% csrf_token %}
@@ -12,7 +12,7 @@ Register
 
 <br>
 
-Login
+<h3> Login </h3>
 
 <form action="{% url 'classified_ads:login'%}" method="post">
   {% csrf_token %}
