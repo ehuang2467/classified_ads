@@ -18,14 +18,16 @@
 <form action="{% url 'classified_ads:post'%}" method="post">
   {% csrf_token %}
   <select name="ad_type" id="ad_type">
-    {# I would like to get ad_types from models in the future instead of hardcoding
-    for correctness #}
+
     <option value="Buy">Buy</option>
     <option value="Sell">Sell</option>
   </select>
   <br>
   <label for="post">Post:</label><br>
-  <input type="text" id="post" name="post"><br>
+  <input type="text" id="post" name="post">
+  <br>
+  <label for="image">Upload an image:</label>
+  <input type="file" id="image" name="image">
   <br>
   <input type="submit" value="Post ad">
 </form>

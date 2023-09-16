@@ -41,6 +41,7 @@ def comment(request, pk):
 
 
 def post(request):
+    image = request.FILES["image"]
     new_ad = Ad(text=request.POST["post"],
                 ad_type=request.POST["ad_type"],
                 date_posted=timezone.now(),

@@ -1,2 +1,13 @@
 implement:
 DRY principle for displaying user logged in, etc
+maybe allow users to upload photos in their ads:
+  https://docs.djangoproject.com/en/4.1/topics/http/file-uploads/
+
+Read about forms:
+  https://docs.djangoproject.com/en/4.1/topics/forms/
+  
+For index template, get ad_types from model instead of hardcoding
+
+Incorporate sessions/cookies? 
+  https://docs.djangoproject.com/en/4.1/topics/http/sessions/
+

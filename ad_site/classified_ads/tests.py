@@ -5,7 +5,7 @@ import datetime
 from .models import Ad, Comment
 
 
-def create_ad(ad_type=Ad.BUY, text="", days=0, user=""):
+def create_ad(ad_type=Ad.BUY, text="", days=0, user=None):
     """
     Create an ad with the given parameters and published the
     given number of `days` offset to now (negative for questions published
@@ -17,7 +17,7 @@ def create_ad(ad_type=Ad.BUY, text="", days=0, user=""):
     return new_ad
 
 
-def create_comment(parent_ad, text="", days=0, user=""):
+def create_comment(parent_ad, text="", days=0, user=None):
     """
     Create a comment with the given parameters and published the
     given number of `days` offset to now (negative for questions published
