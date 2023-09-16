@@ -26,7 +26,8 @@ class Ad(Postable):
     ad_type = models.CharField(
         max_length=4, choices=ad_type_choices)
     image = models.ImageField(
-        upload_to="classified_ads/images", null=True, default=None)
+        upload_to="classified_ads/static/classified_images",
+        null=True, default=None)
 
 
 class Comment(Postable):

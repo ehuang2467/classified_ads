@@ -1,8 +1,9 @@
 <form action="{% url 'classified_ads:index'%}">
   <input type="submit" value="Back to home">
 </form>
+
+<h1>{{ ad.text }}</h1>
 {% load static %}
-<h1>{{ ad.ad_text }}</h1>
 <img src="{% static 'classified_ads'%}{{ad.image.url}}">
 <ul>
   {% for comment in ad.comment_set.all %}
