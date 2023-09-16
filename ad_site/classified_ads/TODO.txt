@@ -3,8 +3,6 @@ DRY principle for displaying user logged in, etc
 
 allow users to upload multiple photos in their ads
 
-scale image size
-
 handle the media_root in settings better
 
 Read about forms:
