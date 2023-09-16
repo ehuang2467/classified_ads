@@ -31,6 +31,7 @@ You cannot post ads without logging in.
 
 {% if user.is_authenticated %}
 <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+
 <form action="{% url 'classified_ads:logout'%}" method="post">
   {% csrf_token %}
   <input type="submit" value="Logout">

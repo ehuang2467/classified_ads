@@ -93,24 +93,3 @@ def login_view(request):
 def logout_view(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('classified_ads:index'))
-
-
-def form_testing(request):
-    from .forms import NameForm
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        name_form = NameForm(request.POST)
-        # check whether it's valid:
-        if name_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            name = name_form.cleaned_data["your_name"]
-            return HttpResponse(f"Form success! Your name is {name}")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        name_form = NameForm()
-
-    return render(request, 'classified_ads/form_testing.html',
-                  {'name_form': name_form})
