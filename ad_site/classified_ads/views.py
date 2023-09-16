@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import auth  # authenticate, login, logout, get_user
+from .forms import AdForm, CommentForm
 
 
 # class IndexView(generic.ListView):
@@ -31,7 +32,6 @@ def post_ad(request, ad_form):
 
 
 def index(request):
-    from .forms import AdForm
     if request.method == 'POST':
         ad_form = AdForm(request.POST, request.FILES)
         if ad_form.is_valid():
@@ -45,27 +45,40 @@ def index(request):
     return render(request, "classified_ads/index.html", context_dict)
 
 
-class DetailView(generic.DetailView):
-    model = Ad
-    template_name = 'classified_ads/detail.html'
+# class DetailView(generic.DetailView):
+#     model = Ad
+#     template_name = 'classified_ads/detail.html'
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['comment_list'] = Ad.objects.all()
-        return context
+#     def get_context_data(self, **kwargs):
+#         # Call the base implementation first to get a context
+#         context = super().get_context_data(**kwargs)
+#         # Add in a QuerySet of all the books
+#         context['comment_list'] = Ad.objects.all()
+#         return context
 
 
-def comment(request, pk):
-    ad = get_object_or_404(Ad, pk=pk)
+def post_comment(request, comment_form, ad):
     new_comment = Comment(parent_ad=ad,
-                          text=request.POST["comment"],
+                          text=comment_form.cleaned_data["text"],
                           date_posted=timezone.now(),
                           user=auth.get_user(request))
     new_comment.save()
     ad.comment_set.add(new_comment)
-    return HttpResponseRedirect(reverse('classified_ads:detail', args=(ad.id,)))
+
+
+def detail(request, pk):
+    ad = get_object_or_404(Ad, pk=pk)
+    if request.method == 'POST':
+
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            post_comment(request, comment_form, ad)
+            return HttpResponseRedirect(
+                reverse('classified_ads:detail', kwargs={"pk": pk}))
+    else:
+        comment_form = CommentForm()
+    context_dict = {"ad": ad, "comment_form": comment_form}
+    return render(request, "classified_ads/detail.html", context_dict)
 
 
 def login_register(request):

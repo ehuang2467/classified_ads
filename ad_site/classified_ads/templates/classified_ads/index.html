@@ -20,7 +20,7 @@
 <form action="{% url 'classified_ads:index'%}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ ad_form.as_div }}
-  <input type="submit" value="Post Ad">
+  <input type="submit" value="Post">
 </form>
 
 {% else %}

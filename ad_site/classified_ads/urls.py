@@ -5,8 +5,7 @@ app_name = "classified_ads"
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
-    path("<int:pk>/comment/", views.comment, name="comment"),
+    path("<int:pk>/", views.detail, name="detail"),
     path("post/", views.post_ad, name="post"),
     path("login_register/", views.login_register, name="login_register"),
     path("register/", views.register, name="register"),

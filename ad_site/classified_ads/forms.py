@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ad
+from .models import Ad, Comment
 
 
 class AdForm(ModelForm):
@@ -11,9 +11,15 @@ class AdForm(ModelForm):
             "text": "Ad Description",
             "image": "Image (optional)",
         }
-        # help_texts = {
-        #     "image": "optional"
-        # }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text"]
+        labels = {
+            "text": "Comment",
+        }
 
 
 class NameForm(forms.Form):

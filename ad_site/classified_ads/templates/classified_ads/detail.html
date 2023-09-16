@@ -6,14 +6,15 @@
   <input type="submit" value="Back to home">
 </form>
 
-<h1>{{ ad.text }}</h1>
-
+<h1>{{ ad.text }}</h1> - Posted by {{ad.user.username}} on {{ad.date_posted}}
+<br>
 
 {% if ad.image %}
 <img src="{% static 'classified_ads'%}{{ad.image.url}}">
 {% endif %}
 
-
+<hr>
+<h2>Comments</h2>
 <ul>
   {% for comment in ad.comment_set.all %}
   <li>{{ comment.text }}
@@ -22,20 +23,22 @@
 </ul>
 
 {% if user.is_authenticated %}
+
+<form action=" {% url 'classified_ads:detail' ad.id %}" method="post">
+  {% csrf_token %}
+  <b>Post a comment</b>
+  {{comment_form.as_div}}
+  <input type="submit" value="Post">
+</form>
+
+{% else %}
+You cannot post comments without logging in.
+{% endif %}
+
+<br>
+
+{% if user.is_authenticated %}
 <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
 {% else %}
 <p>Welcome, new user. Please log in.</p>
-{% endif %}
-
-{% if user.is_authenticated %}
-
-<form action=" {% url 'classified_ads:comment' ad.id %}" method="post">
-  {% csrf_token %}
-  <label for="comment">Comment:</label><br>
-  <input type="text" id="comment" name="comment"><br>
-  <br>
-  <input type="submit" value="Post comment">
-</form>
-{% else %}
-You cannot post comments without logging in.
 {% endif %}
