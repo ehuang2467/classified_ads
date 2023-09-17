@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 import datetime
 from .models import Ad, Comment
+from django.contrib import auth
 
 
 def create_ad(ad_type=Ad.BUY, text="", days=0, user=None):
@@ -85,10 +86,17 @@ class AdDetailViewTests(TestCase):
 
 class AuthTests(TestCase):
     def test_register_and_login(self):
+        """
+        Before registering and logging in, not authenticated user.
+        After, is authenticated user.
+        """
+        self.assertNotIn('_auth_user_id', self.client.session)
         register_context = {"username": "fake_username",
                             "password": "fake_password"}
         self.client.post(
             reverse('classified_ads:register'), register_context
         )
-        self.assertTrue(self.client.login(username=register_context["username"],
-                                          password=register_context["password"]))
+        self.client.post(
+            reverse('classified_ads:login'), register_context
+        )
+        self.assertIn('_auth_user_id', self.client.session)
