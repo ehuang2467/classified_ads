@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import './App.css';
 
-const ads_json = [{
-  "ad_type": "sell",
-  "text": "selling bike", "user": "bob", "date": "1/20/2023"
-},
-{
-  "ad_type": "buy",
-  "text": "buy car", "user": "eric", "date": "4/23/2023"
-}]
+const ads_json = [
+  {
+    "ad_type": "sell",
+    "text": "selling bike", "user": "bob", "date": "1/20/2023"
+  },
+  {
+    "ad_type": "buy",
+    "text": "buy car", "user": "eric", "date": "4/23/2023"
+  }
+]
 
 
 function Filterable_Ads() {

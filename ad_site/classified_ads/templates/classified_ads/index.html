@@ -7,12 +7,13 @@ Recent Ad Listings
 {% block js %}
 {% load static %}
 <script src="{% static 'classified_ads/test_script.js' %}"></script>
+<script src="{% static 'classified_ads/index.js' %}"></script>
 {% endblock js %}
 
 {% block content %}
 
 <button onclick="myFunction()">Test if JavaScript is working</button>
-
+<div id="root"></div>
 
 {% if latest_ads_list %}
 <ul>
