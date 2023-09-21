@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "classified_ads.apps.ClassifiedAdsConfig"
+    "classified_ads.apps.ClassifiedAdsConfig",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [

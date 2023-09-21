@@ -1,3 +1,4 @@
+from rest_framework import permissions
 from django.shortcuts import render, get_object_or_404
 from .models import Ad, Comment
 from django.utils import timezone
@@ -6,6 +7,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import auth
 from .forms import AdForm, CommentForm, UserForm
+from rest_framework import viewsets
+from .serializers import AdSerializer
 
 
 # class IndexView(generic.ListView):
@@ -106,3 +109,12 @@ def login_view(request):
 def logout_view(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('classified_ads:index'))
+
+
+class AdViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows ads to be viewed.
+    """
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+    permission_classes = [permissions.AllowAny]
