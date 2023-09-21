@@ -6,11 +6,19 @@ Recent Ad Listings
 
 {% block js %}
 {% load static %}
-<script src="{% static 'classified_ads/index.js' %}"></script>
-<script type="module" src="{% static 'classified_ads/test_script.js' %}"></script>
+<!-- <script src="{% static 'classified_ads/test_script.js' %}"></script> -->
+<script src="{% static 'classified_ads/react.js' %}"></script>
+<script src="{% static 'classified_ads/react_dom.js' %}"></script>
+<script src="{% static 'classified_ads/babel.js' %}"></script>
+<script type="text/babel" src="{% static 'classified_ads/index.js' %}"></script>
+<!-- <script type="text/javascript">
+  // Initialization glue code
+  window.MyApp.init({ el: '.app-mountpoint' });
+</script> -->
 {% endblock js %}
 
 {% block content %}
+<div class="app-mountpoint" />
 
 <button onclick="myFunction_index()">Test if JavaScript is working</button>
 <div id="root"></div>
