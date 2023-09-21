@@ -1,4 +1,3 @@
-from rest_framework import permissions
 from django.shortcuts import render, get_object_or_404
 from .models import Ad, Comment
 from django.utils import timezone
@@ -8,7 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from .forms import AdForm, CommentForm, UserForm
 from rest_framework import viewsets
-from .serializers import AdSerializer
+from rest_framework import permissions
+from .serializers import AdSerializer, UserSerializer
 
 
 # class IndexView(generic.ListView):

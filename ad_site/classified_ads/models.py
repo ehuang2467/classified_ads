@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.conf import settings
 
 
 class Postable(models.Model):
     text = models.CharField(max_length=1000)
     date_posted = models.DateTimeField()
     user = models.ForeignKey(
-        auth_models.User, on_delete=models.SET_NULL, null=True)
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL, null=True)
 
     class Meta:
         abstract = True
