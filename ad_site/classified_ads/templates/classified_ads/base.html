@@ -1,44 +1,52 @@
+<!DOCTYPE html>
+<html>
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'classified_ads/style.css' %}">
 {% endblock css %}
 
-{% block header %}
+<body>
 
-<nav>
-  <div class="heading">
-    <h1>Eric's Classified Ad Site</h1>
-  </div>
+  {% block header %}
 
-  <ul class="nav-links">
+  <nav>
+    <div class="heading">
+      <h1>Eric's Classified Ad Site</h1>
+    </div>
 
-    <li><a href="{% url 'classified_ads:index'%}">Home</a></li>
+    <ul class="nav-links">
 
-  </ul>
+      <li><a href="{% url 'classified_ads:index'%}">Home</a></li>
 
-  {% block login_status %}
-  <div class="login-status">
-    {% if user.is_authenticated %}
+    </ul>
 
-    Welcome, {{ user.username }}. Thanks for logging in.
-    <a href="{% url 'classified_ads:logout'%}">Logout</a>
+    {% block login_status %}
+    <div class="login-status">
+      {% if user.is_authenticated %}
 
-    {% else %}
+      Welcome, {{ user.username }}. Thanks for logging in.
+      <a href="{% url 'classified_ads:logout'%}">Logout</a>
 
-    Welcome, new user. Please log in or register.
-    <a href="{% url 'classified_ads:login_register'%}">Login/Register</a>
-    {% endif %}
-  </div>
-  {% endblock login_status %}
+      {% else %}
 
-</nav>
-{% endblock header %}
+      Welcome, new user. Please log in or register.
+      <a href="{% url 'classified_ads:login_register'%}">Login/Register</a>
+      {% endif %}
+    </div>
+    {% endblock login_status %}
 
-<h2>
-  {% block page_title %}
-  {% endblock page_title %}
-</h2>
+  </nav>
+  {% endblock header %}
 
-{% block content %}
-Your content here!!!
-{% endblock content %}
+  <h2>
+    {% block page_title %}
+    {% endblock page_title %}
+  </h2>
+
+  {% block content %}
+  Your content here!!!
+  {% endblock content %}
+
+</body>
+
+</html>

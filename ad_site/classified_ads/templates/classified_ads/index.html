@@ -6,6 +6,13 @@ Recent Ad Listings
 
 {% block content %}
 
+
+{% load static %}
+<p id="demo">Date will appear here</p>
+<script src="{% static 'classified_ads/test_script.js'}"></script>
+<button onclick="myFunction()">Click me!</button>
+
+
 {% if latest_ads_list %}
 <ul>
   {% for ad in latest_ads_list %}
