@@ -4,12 +4,17 @@
 Recent Ad Listings
 {% endblock page_title %}
 
+{% block js %}
+{% load static %}
+<script src="{% static 'classified_ads/test_script.js' %}"></script>
+{% endblock js %}
+
 {% block content %}
 
 
-{% load static %}
+
 <p id="demo">Date will appear here</p>
-<script src="{% static 'classified_ads/test_script.js'}"></script>
+
 <button onclick="myFunction()">Click me!</button>
 
 
