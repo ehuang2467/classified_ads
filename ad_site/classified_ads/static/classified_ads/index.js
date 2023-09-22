@@ -64,19 +64,12 @@ function AdsList({ ads, ad_type, search_text }) {
       (search_text == "" || ad.text.includes(search_text)))
   }
 
-
   let ads_filtered = ads.filter((ad) => ad_filter(ad))
   function ad_json_unpacker(ad) {
 
     let ad_href = "http://localhost:8000/classified_ads/" + ad.pk + "/"
 
     function date_to_string(date_object) {
-      // return date_object.getMonth() + "/" +
-      //   date_object.getDate() + "/" +
-      //   date_object.getFullYear() + " " +
-      //   (date_object.getHours() % 12) + ":" +
-      //   date_object.getMinutes() + " " +
-      //   (date_object.getHours() > 12 ? "PM" : "AM")
       return date_object.toLocaleDateString('en-us',
         {
           weekday: "short", year: "numeric", month: "short", day: "numeric",
@@ -86,9 +79,10 @@ function AdsList({ ads, ad_type, search_text }) {
 
     let date_string = date_to_string(new Date(ad.date_posted))
 
-    return <a href={ad_href}>
-      {ad.ad_type + ": " + ad.text +
-        ". Posted by " + ad.user + " on " + date_string}</a>
+    return <div> <a href={ad_href}>
+      {ad.ad_type + ": " + ad.text}</a>
+      {". Posted by " + ad.user + " on " + date_string}
+    </div>
   }
   function ad_json_key(ad) {
     return ad.user + ad.text
