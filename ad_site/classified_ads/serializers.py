@@ -8,4 +8,4 @@ class AdSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ["text", "date_posted", "ad_type", "user"]
+        fields = ["text", "date_posted", "ad_type", "user", "pk"]

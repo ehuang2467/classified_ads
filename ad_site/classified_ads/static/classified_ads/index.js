@@ -65,12 +65,16 @@ function AdsList({ ads, ad_type, search_text }) {
 
   let ads_filtered = ads.filter((ad) => ad_filter(ad))
   function ad_json_unpacker(ad) {
-    return ad.ad_type + ": " + ad.text + ". Posted by " + ad.user + " on " + ad.date
+    let ad_href = "http://localhost:8000/classified_ads/" + ad.pk + "/"
+    return <a href={ad_href}>
+      {ad.ad_type + ": " + ad.text +
+        ". Posted by " + ad.user + " on " + ad.date + " Pk is " + ad.pk}</a>
   }
   function ad_json_key(ad) {
     return ad.user + ad.text
   }
-  let lis = ads_filtered.map((item) => <li key={ad_json_key(item)}>{ad_json_unpacker(item)}</li>)
+  let lis = ads_filtered.map(
+    (item) => <li key={ad_json_key(item)}>{ad_json_unpacker(item)}</li>)
   return (
     <div className='ads_list'>
       <ul>{lis}</ul>
