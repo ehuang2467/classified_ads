@@ -1,7 +1,5 @@
 implement:
 
-connect the react filterable list with the django rest framework Ad api
-
 allow users to upload multiple photos in their ads
 
 handle the media_root in settings better
