@@ -71,9 +71,17 @@ function AdsList({ ads, ad_type, search_text }) {
     let ad_href = "http://localhost:8000/classified_ads/" + ad.pk + "/"
 
     function date_to_string(date_object) {
-      return date_object.getMonth() + "/" +
-        date_object.getDate() + "/" +
-        date_object.getFullYear()
+      // return date_object.getMonth() + "/" +
+      //   date_object.getDate() + "/" +
+      //   date_object.getFullYear() + " " +
+      //   (date_object.getHours() % 12) + ":" +
+      //   date_object.getMinutes() + " " +
+      //   (date_object.getHours() > 12 ? "PM" : "AM")
+      return date_object.toLocaleDateString('en-us',
+        {
+          weekday: "short", year: "numeric", month: "short", day: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        })
     }
 
     let date_string = date_to_string(new Date(ad.date_posted))
