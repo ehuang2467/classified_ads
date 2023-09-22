@@ -48,7 +48,9 @@ function SearchBar({ changer }) {
   return (
     <div className='search_bar'>
       <label>Search:</label>
-      <input type="text" onChange={(event) => changer(event.target.value)}></input>
+      <input type="text"
+        onChange={(event) => changer(event.target.value)}>
+      </input>
     </div>
   )
 
@@ -65,10 +67,20 @@ function AdsList({ ads, ad_type, search_text }) {
 
   let ads_filtered = ads.filter((ad) => ad_filter(ad))
   function ad_json_unpacker(ad) {
+
     let ad_href = "http://localhost:8000/classified_ads/" + ad.pk + "/"
+
+    function date_to_string(date_object) {
+      return date_object.getMonth() + "/" +
+        date_object.getDate() + "/" +
+        date_object.getFullYear()
+    }
+
+    let date_string = date_to_string(new Date(ad.date_posted))
+
     return <a href={ad_href}>
       {ad.ad_type + ": " + ad.text +
-        ". Posted by " + ad.user + " on " + ad.date + " Pk is " + ad.pk}</a>
+        ". Posted by " + ad.user + " on " + date_string}</a>
   }
   function ad_json_key(ad) {
     return ad.user + ad.text
