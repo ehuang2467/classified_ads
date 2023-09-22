@@ -11,28 +11,24 @@ Recent Ad Listings
 <script src="{% static 'classified_ads/react_dom.js' %}"></script>
 <script src="{% static 'classified_ads/babel.js' %}"></script>
 <script type="text/babel" src="{% static 'classified_ads/index.js' %}"></script>
-<!-- <script type="text/javascript">
-  // Initialization glue code
-  window.MyApp.init({ el: '.app-mountpoint' });
-</script> -->
 {% endblock js %}
 
 {% block content %}
-<div class="app-mountpoint" />
-
-<button onclick="myFunction_index()">Test if JavaScript is working</button>
-<div id="root"></div>
-
-{% if latest_ads_list %}
-<ul>
-  {% for ad in latest_ads_list %}
-  <li><a href="{% url 'classified_ads:detail' ad.id %}">{{ ad.text }}</a>
-    Posted on: {{ ad.date_posted }} by {{ ad.user.username }}</li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No ads have been posted.</p>
-{% endif %}
+<div class="app-mountpoint">
+  <!-- If the script for the React filterable ad list fails, then
+the static ad list will take its place, since the static ad list is surrounded 
+by the app-mountpoint tags -->
+  {% if latest_ads_list %}
+  <ul>
+    {% for ad in latest_ads_list %}
+    <li><a href="{% url 'classified_ads:detail' ad.id %}">{{ ad.text }}</a>
+      Posted on: {{ ad.date_posted }} by {{ ad.user.username }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No ads have been posted.</p>
+  {% endif %}
+</div>
 
 {% if user.is_authenticated %}
 <b>Post an ad</b>
