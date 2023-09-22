@@ -2,19 +2,22 @@
 // var React = require('react');
 // var ReactDOM = require('react-dom/client');
 // import ReactDOM from 'react-dom/client';
-const ads_json = [
-  {
-    "ad_type": "sell",
-    "text": "selling bike", "user": "bob", "date": "1/20/2023"
-  },
-  {
-    "ad_type": "buy",
-    "text": "buy car", "user": "eric", "date": "4/23/2023"
-  }
-]
+
+// let ads_json = [
+//   {
+//     "ad_type": "sell",
+//     "text": "selling bike", "user": "bob", "date": "1/20/2023"
+//   },
+//   {
+//     "ad_type": "buy",
+//     "text": "buy car", "user": "eric", "date": "4/23/2023"
+//   },
+// ]
 
 
-function Filterable_Ads() {
+
+
+function Filterable_Ads({ ads_json }) {
   const [ad_type, adtype_changer] = React.useState("BuyOrSell")
   const [search_text, search_text_changer] = React.useState("")
   return (
@@ -77,9 +80,25 @@ function AdsList({ ads, ad_type, search_text }) {
 }
 
 
+
+const api_url = "http://localhost:8000/classified_ads/api/ads"
+
+// let ads_json = fetch(api_url).then((response) => response.json())
+
 function App() {
+  const [adsJson, setAdsJson] = React.useState([])
+  const fetchInfo = () => {
+    return fetch(api_url)
+      .then((res) => res.json())
+      .then((d) => setAdsJson(d))
+  }
+
+
+  React.useEffect(() => {
+    fetchInfo();
+  }, []);
   return (
-    <Filterable_Ads />
+    <Filterable_Ads ads_json={adsJson} />
   );
 }
 // import App from './App.js';

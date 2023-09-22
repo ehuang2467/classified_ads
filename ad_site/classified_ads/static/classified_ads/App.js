@@ -1,25 +1,25 @@
 import { useState } from 'react';
 
-// const api_url = "http://localhost:8000/classified_ads/api/ads"
+const api_url = "http://localhost:8000/classified_ads/api/ads"
 
-// const fetchInfo = () => {
-//   return fetch(url)
-//     .then((res) => res.json())
-//     .then((d) => setData(d))
-// }
+const fetchInfo = () => {
+  return fetch(url)
+    .then((res) => res.json())
+    .then((d) => setData(d))
+}
 
-const ads_json = [
-  {
-    "ad_type": "sell",
-    "text": "selling bike", "user": "bob", "date": "1/20/2023"
-  },
-  {
-    "ad_type": "buy",
-    "text": "buy car", "user": "eric", "date": "4/23/2023"
-  }
-]
+// const ads_json = [
+//   {
+//     "ad_type": "sell",
+//     "text": "selling bike", "user": "bob", "date": "1/20/2023"
+//   },
+//   {
+//     "ad_type": "buy",
+//     "text": "buy car", "user": "eric", "date": "4/23/2023"
+//   }
+// ]
 
-// let ads_json = fetchInfo()
+const ads_json = fetchInfo()
 
 
 function Filterable_Ads() {
