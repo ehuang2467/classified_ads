@@ -8,7 +8,7 @@ from django.contrib import auth
 from .forms import AdForm, CommentForm, UserForm
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import AdSerializer, UserSerializer
+from .serializers import AdSerializer
 
 
 # class IndexView(generic.ListView):
