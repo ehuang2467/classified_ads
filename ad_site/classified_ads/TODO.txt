@@ -1,5 +1,7 @@
 implement:
 
+rewrite tests to not fail on the React index list
+
 allow users to upload multiple photos in their ads
 
 handle the media_root in settings better

@@ -85,7 +85,7 @@ function AdsList({ ads, ad_type, search_text }) {
     </div>
   }
   function ad_json_key(ad) {
-    return ad.user + ad.text
+    return ad.pk
   }
   let lis = ads_filtered.map(
     (item) => <li key={ad_json_key(item)}>{ad_json_unpacker(item)}</li>)
